@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080b14">
+<title>Baccarat · H01 H02 H03</title>
+<style>
+:root{color-scheme:dark;--bg:#080b14;--panel:#10162a;--pane:#0c1426;--line:#2b3652;--text:#f4f7ff;--muted:#a3b3d0;--gold:#f5d06a;--player:#64a4ff;--banker:#ff686f;--good:#5ae5aa;--bad:#ff7885;--tie:#efd37b}
+*{box-sizing:border-box}html{background:#080b14}body{margin:0;background:#080b14;color:var(--text);font:13px/1.42 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:100dvh}button,select{font:inherit}button{cursor:pointer;touch-action:manipulation}button:disabled{opacity:.5;cursor:default}
+.container{width:min(100%,460px);padding:12px 11px 36px;margin:auto}.header{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px}.brand{font-size:18px;font-weight:950;letter-spacing:-.4px}.brand span{color:var(--gold)}.overline{font-size:9px;font-weight:850;letter-spacing:.05em;color:var(--gold)}.tiny{font-size:10px;color:var(--muted)}.tagline{color:#92a5c9;font-size:11px;margin-top:2px}.roundpill{border:1px solid #2a3c6e;color:#b8cfff;border-radius:50px;padding:5px 8px;font-size:11px;white-space:nowrap}
+.panel{border:1px solid #2a3453;background:var(--panel);border-radius:14px;margin-top:9px;padding:10px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:7px;margin-bottom:8px}.sectionHead b{font-size:11px;color:var(--gold)}.line{height:1px;background:var(--line);margin:9px 0}
+.boardrow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px}.boardrow select{width:100%;min-width:0;background:#0c152b;border:1px solid #3a486c;border-radius:8px;padding:9px 8px;color:#fff;font-size:12px;font-weight:700}.smallBtn{background:#1a2542;border:1px solid #40527f;color:#cbd9f9;border-radius:8px;padding:8px 10px;font-weight:800}.smallBtn.danger{background:#371927;border-color:#73313b;color:#ffd9de}.actionRow{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}.actionRow button{flex:1;min-width:64px}.textnote{font-size:10px;color:#95a5c5;margin-top:7px}.counter{font-weight:900;color:#e5edff}
+.entry{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.choice{border-radius:12px;padding:12px 8px;border:1px solid;font-size:18px;font-weight:950;min-height:61px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;gap:3px}.choice small{font-size:10px;font-weight:750}.choice.player{background:#132b56;border-color:#2b62b5;color:#84b9ff}.choice.banker{background:#4d1724;border-color:#a34256;color:#ff99a0}.choice.tie{background:#3e3416;border-color:#826f33;color:#ffe38a}
+.hero{border:1px solid #435b91;border-radius:12px;background:#102344;padding:11px 10px;margin-bottom:9px}.hero.warning{background:#291b27;border-color:#a35364}.hero.blank{background:#111a2d;border-color:#344460}.heroTop{font-size:10px;color:#c0cde6;display:flex;justify-content:space-between;gap:5px}.heroBig{font-size:20px;font-weight:950;line-height:1.2;margin-top:4px;letter-spacing:-.5px}.heroBig.p{color:#73b0ff}.heroBig.b{color:#ff858c}.heroBig.conflict{color:#ffce74}.heroBig.idle{color:#bbc8df}.heroSmall{font-size:10px;color:#a9bada;margin-top:4px}
+.ruleGrid{display:grid;grid-template-columns:1fr;gap:7px}.rule{background:var(--pane);border:1px solid #34405f;border-radius:11px;padding:10px}.rule.hit{border-color:#917741;box-shadow:inset 3px 0 #d2ac41}.ruleHead{display:flex;align-items:center;gap:7px}.ruleID{font-size:12px;font-weight:950;color:#fff}.ruleDirection{font-size:10px;font-weight:900;padding:2px 6px;border-radius:6px;background:#172f50;color:#75afff}.ruleDirection.b{background:#4a1b2b;color:#ff9198}.ruleStatus{font-size:9px;color:#94a4c6;margin-left:auto;font-weight:950}.rule.hit .ruleStatus{color:#f5d678}.ruleName{font-size:10px;color:#a8badd;margin-top:4px;line-height:1.45}.ruleAction{font-size:12px;font-weight:950;margin-top:6px}.ruleAction.p{color:#72b4ff}.ruleAction.b{color:#ff868d}.ruleAction.off{color:#7788a9;font-size:11px;font-weight:750}.numbers{display:flex;justify-content:space-between;align-items:baseline;gap:7px;margin-top:8px;padding:6px 7px;border:1px solid #344260;background:#121e34;border-radius:8px}.numbers .rate{font-size:20px;font-weight:950;color:#fff}.numbers .rate.none{color:#8390ad}.numbers .rate.low{color:#ff8791}.numbers .detail{font-size:10px;color:#aebfdf}.numbers .detail b{font-weight:850}.historyChips{display:flex;align-items:center;gap:4px;overflow:auto;padding:6px 1px 1px;scrollbar-width:none}.historyChips::-webkit-scrollbar{display:none}.historyChips button{min-width:22px;height:22px;border:1px solid transparent;border-radius:5px;font-size:10px;font-weight:950;color:#fff;flex-shrink:0}.historyChips .good{background:#176747}.historyChips .bad{background:#913e4a}.historyChips .tie{background:#7a672c}.historyChips button.selected{outline:2px solid #f8dc85;outline-offset:1px}.historicalDetail{margin-top:5px;color:#aab8d3;font-size:10px;line-height:1.4}.historicalDetail strong{color:#fff}
+.roadState{display:flex;gap:5px;flex-wrap:wrap}.roadState span{border:1px solid #36415d;border-radius:7px;background:#0c1426;padding:4px 6px;color:#b7c9e3;font-size:10px}.roadState .R{color:#ff9fa4}.roadState .X{color:#8dc0ff}
+.recent{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px}.recent button{min-width:0;min-height:31px;border-radius:6px;border:1px solid #34415e;font-size:12px;font-weight:950;background:#17243b;color:#bcc9de;display:flex;align-items:center;justify-content:center;flex-direction:column;line-height:1.1}.recent button.p{color:#92c3ff;border-color:#375d94;background:#152a4b}.recent button.b{color:#ffa0a8;border-color:#733442;background:#3a1c2a}.recent button.h{color:#ffe697;border-color:#726235;background:#42391e}.recent button small{font-size:8px;color:#90a3c2;font-weight:700;margin-top:2px}
+.notes{font-size:10px;color:#96a5c3;line-height:1.5}.notes b{color:#e8eefb}#msg{position:fixed;bottom:max(16px,env(safe-area-inset-bottom));left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;background:#202c47;border:1px solid #6275a5;color:#fff;border-radius:10px;padding:9px 12px;font-size:11px;box-shadow:0 5px 30px #0009;z-index:30;max-width:calc(100vw - 26px);text-align:center}#msg.show{opacity:1;transform:translate(-50%,0)}input[type=file]{display:none}.skip{font-size:10px;color:#8e9cb8;text-align:center;padding:10px 0 4px}
+@media(min-width:420px){.container{padding:16px 12px 38px}.ruleGrid{gap:8px}.rule{padding:11px 12px}}
+
+/* Hai tab rõ ràng trên iPhone, không tốn chiều cao */
+.mainTabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0 2px}
+.mainTab{min-width:0;background:#11192b;border:1px solid #34425f;border-radius:9px;padding:10px 6px;color:#a9badb;font-size:12px;font-weight:900}
+.mainTab.active{background:#233864;border-color:#7796e2;color:#fefefe}
+.tabPage[hidden]{display:none!important}
+.roadIntro{color:#a5b8d6;font-size:11px;line-height:1.5}
+.roadIntro strong{color:#f2d67b}
+.roadStats{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.roadStats span{border:1px solid #39496a;padding:5px 7px;border-radius:7px;color:#c5d4ee;background:#0e1a32;font-size:10px}
+.roadPanel{background:#0c1426;border:1px solid #303e5b;border-radius:11px;padding:9px;margin-top:9px}
+.roadTitle{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-bottom:6px}
+.roadTitle strong{font-size:12px;color:#f7f7ff}
+.roadTitle small{font-size:9px;color:#a0b0d0}
+.roadDisplay{border:1px solid #39445d;border-radius:7px;background:#101827;padding:6px 5px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:#45516f #101827;overscroll-behavior-x:contain}
+.roadMatrix{display:grid;grid-auto-flow:column;grid-template-rows:repeat(6,23px);grid-auto-columns:23px;gap:0;width:max-content;min-height:138px;background:#121a29}
+.roadCell{height:23px;width:23px;position:relative;border-right:1px solid #2d3649;border-bottom:1px solid #2d3649;display:flex;align-items:center;justify-content:center}
+.roadCell .symbol{display:inline-flex;align-items:center;justify-content:center;font-weight:900;line-height:1;width:17px;height:17px;font-size:11px}
+.roadCell.p .symbol,.roadCell.b .symbol{border:2px solid currentColor;border-radius:50%;background:#1d2539}
+.roadCell.p{color:#73b8ff}.roadCell.b{color:#ff787f}
+.roadCell.h .symbol{border:1px solid #63d49a;border-radius:50%;color:#8affbe;font-size:11px}
+.roadCell.red,.roadCell.blue{color:#ff686f}
+.roadCell.blue{color:#76b8ff}
+.roadCell.eye .symbol{border:2px solid currentColor;border-radius:50%;width:14px;height:14px}
+.roadCell.small .symbol{border-radius:50%;background:currentColor;width:11px;height:11px}
+.roadCell.roach .symbol{font-size:19px;transform:translateY(-1px)}
+.roadCell.latest{background:#27314b;box-shadow:inset 0 0 0 1px #e4c66e}
+.roadTie{position:absolute;bottom:-2px;right:0;color:#6ef7a2;font-size:12px;font-weight:900;line-height:1;text-shadow:0 1px 3px #091325}
+.roadTieNum{position:absolute;top:-2px;right:0;background:#315b3b;border-radius:3px;font-size:8px;padding:0 2px;color:#c5ffcc}
+.roadExplain{margin-top:5px;font-size:10px;color:#9aafce}
+.checkRow{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:7px;flex-wrap:wrap}
+.checkRow .checkStatus{font-size:10px;color:#a1b2d1;flex:1;min-width:102px}
+.checkRow .checkStatus.ok{color:#74efae}.checkRow .checkStatus.bad{color:#ff868d}
+.checkButton{background:#15263b;border:1px solid #3c5471;color:#c1d0e8;border-radius:7px;padding:6px 8px;font-size:10px;font-weight:800}
+.checkButton.ok.active{background:#174a37;border-color:#35a978;color:#a4ffce}
+.checkButton.bad.active{background:#51222e;border-color:#c55464;color:#ffbcc1}
+.roadLegend{display:flex;gap:11px;flex-wrap:wrap;font-size:10px;color:#b7c9e0;margin-top:8px}
+.roadLegend b{font-weight:900}.roadLegend .lP{color:#75b8ff}.roadLegend .lB{color:#ff7a81}.roadLegend .lT{color:#79eba0}
+.roadWarn{margin-top:8px;border-left:3px solid #c5a452;background:#29251e;padding:7px 9px;color:#ead7ad;border-radius:6px;font-size:10px;line-height:1.5}
+@media(max-width:380px){.roadMatrix{grid-template-rows:repeat(6,21px);grid-auto-columns:21px;min-height:126px}.roadCell{height:21px;width:21px}.roadDisplay{padding:4px}}
+
+</style>
+</head>
+<body>
+<main class="container">
+  <div class="header"><div><div class="overline">BACCARAT · CẦU 5 BẢNG</div><div class="brand">TOOL <span>H01 · H02 · H03</span></div><div class="tagline">3 rule thử nghiệm · tự lưu · không cần nhập lá bài</div></div><div id="nextBadge" class="roundpill">Ván #1</div></div>
+  <section class="panel" aria-label="Chọn bàn">
+    <div class="sectionHead"><b>BÀN ĐANG THEO DÕI</b><span class="tiny" id="totalCount">0 ván</span></div>
+    <div class="boardrow"><select id="boardSelect" aria-label="Bàn"></select><button id="addBoard" type="button" class="smallBtn">+ Bàn</button><button id="removeBoard" type="button" class="smallBtn danger" title="Xóa bàn đang chọn">Xóa</button></div>
+    <div class="actionRow"><button id="exportBtn" type="button" class="smallBtn">Xuất JSON</button><button id="importBtn" type="button" class="smallBtn">Nhập JSON</button><button id="undoBtn" type="button" class="smallBtn">↶ Bỏ ván cuối</button></div>
+    <input type="file" id="importFile" accept="application/json,.json">
+  </section>
+  <nav class="mainTabs" aria-label="Chọn trang"><button id="tabPlay" class="mainTab active" type="button" aria-selected="true">NHẬP & 3 RULE</button><button id="tabRoads" class="mainTab" type="button" aria-selected="false">5 BẢNG CẦU</button></nav>
+  <div class="tabPage" id="pagePlay">
+  <section class="panel" aria-label="Nhập kết quả">
+    <div class="sectionHead"><b>NHẬP KẾT QUẢ VÁN VỪA XONG</b><span class="tiny">Chạm 1 lần là lưu</span></div>
+    <div class="entry"><button class="choice player" data-out="P" type="button">PLAYER<small>P · xanh</small></button><button class="choice banker" data-out="B" type="button">BANKER<small>B · đỏ</small></button><button class="choice tie" data-out="H" type="button">HÒA<small>T / H</small></button></div>
+    <div class="textnote">Nhập theo bảng hạt từ trên xuống, hết cột sang cột bên phải; T = Hòa. Sau khi lưu ván #N, các rule bên dưới báo cho <b>ván #N+1</b>. Chưa biết kết quả ván kế thì chưa tính Đ/S.</div>
+  </section>
+  <section class="panel" aria-label="Dự báo 3 rule">
+    <div class="sectionHead"><b>KẾT QUẢ H01–H03</b><span class="tiny">Không ép phiếu khi xung đột</span></div>
+    <div id="hero" class="hero blank"><div class="heroTop">CHƯA CÓ LỊCH SỬ</div><div class="heroBig idle">CHỜ NHẬP VÁN</div></div>
+    <div id="rules" class="ruleGrid"></div>
+  </section>
+  <section class="panel" aria-label="Trạng thái bảng cầu">
+    <div class="sectionHead"><b>TRẠNG THÁI 5 BẢNG</b><span class="tiny">Tính từ kết quả đã lưu</span></div>
+    <div id="roads" class="roadState"></div>
+  </section>
+  <section class="panel" aria-label="Lịch sử kết quả">
+    <div class="sectionHead"><b>LỊCH SỬ GẦN ĐÂY</b><span class="tiny">Chạm một ván để sửa</span></div>
+    <div id="recent" class="recent"></div>
+    <div id="historyNote" class="textnote">Chưa có kết quả.</div>
+  </section>
+  </div>
+  <div class="tabPage" id="pageRoads" hidden>
+    <section class="panel" aria-label="Đối chiếu 5 bảng cầu">
+      <div class="sectionHead"><b>5 BẢNG CẦU · ĐỐI CHIẾU THỰC TẾ</b><span id="roadRound" class="tiny">Ván #1</span></div>
+      <div class="roadIntro">Chỉ nhập P/B/H từ <strong>bảng hạt</strong> bên trái màn hình Baccarat theo thứ tự từ trên xuống, rồi sang cột bên phải. Tool tự dựng 4 bảng còn lại. Chạm <b>Khớp</b> hoặc <b>Lệch</b> cho từng bảng sau khi so sánh với ảnh thật.</div>
+      <div id="roadTopStats" class="roadStats"></div>
+      <div id="roadBoards"></div>
+      <div class="roadLegend"><span><b class="lP">P xanh</b> = Player</span><span><b class="lB">B đỏ</b> = Banker</span><span><b class="lT">T xanh lá</b> = Hòa</span></div>
+      <div class="roadWarn">Ba cầu phụ chỉ phản ánh hình dạng Big Road; đỏ/xanh không có nghĩa báo Banker/Player. Nếu bắt đầu nhập giữa một shoe hoặc thiếu ván trước đó, dấu cầu phụ có thể không khớp. Biểu tượng cặp bài/natural trong ảnh trò chơi không thể dựng chỉ từ P/B/H.</div>
+    </section>
+  </div>
+  <section class="panel notes"><b>Lưu ý về tỷ lệ:</b> % = Đúng / (Đúng + Sai), Hòa ghi riêng. Chỉ dùng dữ liệu của bàn đang chọn và các tín hiệu đã có kết quả. H01 nằm trong H03 nên khi cùng khớp không phải hai bằng chứng độc lập. Ba bảng cầu phụ được suy ra từ Big Road; đây là công cụ kiểm tra thử nghiệm, không bảo đảm xác suất thắng hay lợi thế cược.</section>
+  <div class="skip">Dữ liệu lưu trên trình duyệt này · Xuất JSON để sao lưu</div>
+</main>
+<div id="msg" role="status" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+const KEY='baccarat_h01_h02_h03_standalone_v1',LEGACY='baccarat_dual_v5_rule70_v1';
+const $=id=>document.getElementById(id);
+const uuid=()=>Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,7);
+const htmlSafe=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const point=cards=>cards.reduce((s,c)=>s+(c==='A'?1:/^[2-9]$/.test(String(c))?Number(c):0),0)%10;
+const resultOf=o=>{if(!o||typeof o!=='object')return null;if(['P','B','H','T'].includes(String(o.out??o.result??'').toUpperCase()))return String(o.out??o.result).toUpperCase().replace('T','H');if(Array.isArray(o.p)&&Array.isArray(o.b)){const p=point(o.p),b=point(o.b);return p>b?'P':p<b?'B':'H';}return null;};
+function normalBoards(data){
+ if(!data||!Array.isArray(data.boards))return [];
+ return data.boards.map((b,i)=>{
+  const ordered=(b.rounds||[]).map((r,j)=>({round:Number(r.round??j+1),out:resultOf(r),origin:r.origin||'import'})).filter(r=>Number.isInteger(r.round)&&r.round>0&&r.out).sort((a,b)=>a.round-b.round);
+  const dedup=ordered.filter((r,j)=>j===0||r.round!==ordered[j-1].round);
+  return {id:String(b.id||uuid()),name:String(b.name||`Bàn ${i+1}`).slice(0,70),roundStart:Number(b.roundStart||dedup[0]?.round||1),rounds:dedup,roadChecks:(b.roadChecks&&typeof b.roadChecks==='object'?b.roadChecks:{})};
+ }).filter(Boolean);
+}
+function empty(){return {format:'baccarat-h01-h03-v1',version:1,active:0,boards:[{id:uuid(),name:'Bàn 1',roundStart:1,rounds:[]}]};}
+function load(){
+ try{const v=JSON.parse(localStorage.getItem(KEY)||'null');if(v&&Array.isArray(v.boards)&&v.boards.length){const bs=normalBoards(v);if(bs.length)return {...v,active:Math.min(Math.max(Number(v.active)||0,0),bs.length-1),boards:bs};}}catch(e){}
+ try{const v=JSON.parse(localStorage.getItem(LEGACY)||'null');if(v&&Array.isArray(v.boards)&&v.boards.length){const boards=normalBoards(v);if(boards.length)return {format:'baccarat-h01-h03-v1',version:1,active:Math.min(Number(v.active)||0,boards.length-1),boards};}}catch(e){}
+ return empty();
+}
+let state=load();
+const board=()=>state.boards[state.active];
+const lastRound=b=>b.rounds.length?b.rounds[b.rounds.length-1].round:b.roundStart-1;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));return true;}catch(e){alert('Không lưu được trên trình duyệt này. Hãy xuất JSON sao lưu.');return false;}};
+let toastId;function toast(m){$('msg').textContent=m;$('msg').classList.add('show');clearTimeout(toastId);toastId=setTimeout(()=>$('msg').classList.remove('show'),2100);}
+// Công thức giữ nguyên như H01-H03 trong bản 5 bảng trước. Hòa không tạo dấu cầu.
+function roadShape(history){
+ if(!history.length)return null;
+ const depths=[],sides=[],traces={eye:[],small:[],roach:[]};
+ for(const side of history){
+  if(!sides.length||sides.at(-1)!==side){sides.push(side);depths.push(1)}else depths[depths.length-1]++;
+  const col=depths.length-1,row=depths[col];
+  for(const [name,shift] of [['eye',1],['small',2],['roach',3]]){
+   let color=null;
+   if(row===1){if(col>=shift+1)color=depths[col-1]===depths[col-shift-1]?'R':'X';}
+   else if(col>=shift)color=depths[col-shift]===row-1?'X':'R';
+   if(color)traces[name].push(color);
+  }
+ }
+ const last=name=>traces[name].at(-1)||'-';
+ const tail=(name,n)=>traces[name].length>=n?traces[name].slice(-n).join(''):'-';
+ const mixed=s=>s.length===3&&s!=='RRR'&&s!=='XXX';
+ const be2=tail('eye',2),be3=tail('eye',3),ro3=tail('roach',3);
+ return {cols:depths.length,run:depths.at(-1),side:sides.at(-1),
+  eye:last('eye'),small:last('small'),roach:last('roach'),eye2:be2,eye3:be3,small2:tail('small',2),roach3:ro3,
+  beadP5:history.length>=5?history.slice(-5).filter(x=>x==='P').length:null,
+  bigPrev2:depths.length>=3?depths.at(-3):null,
+  eye2Different:be2.length===2&&be2[0]!==be2[1],eye3Mixed:mixed(be3),roach3Mixed:mixed(ro3)};
+}
+
+// Cùng công thức dựng dấu với roadShape() ở trên. Biểu đồ bám 6 hàng
+// theo quy tắc tail/collision, không dựa vào màu của bên P/B để dựng cầu phụ.
+function activeSegment(rounds){
+ let segment=[],previous=null;
+ for(const r of rounds){if(previous!==null&&r.round!==previous+1)segment=[];segment.push(r);previous=r.round;}
+ return segment;
+}
+function deriveRoadDrawing(rounds){
+ const items=activeSegment(rounds),runs=[],streams={eye:[],small:[],roach:[]},events={eye:[],small:[],roach:[]};
+ let preTies=0;
+ for(const item of items){
+  if(item.out==='H'){if(runs.length)runs[runs.length-1].markers.at(-1).ties++;else preTies++;continue;}
+  if(!runs.length||runs.at(-1).side!==item.out)runs.push({side:item.out,markers:[]});
+  const run=runs.at(-1);run.markers.push({round:item.round,ties:0});
+  const col=runs.length-1,row=run.markers.length;
+  for(const [name,shift] of [['eye',1],['small',2],['roach',3]]){
+   let color=null;
+   if(row===1){if(col>=shift+1)color=runs[col-1].markers.length===runs[col-shift-1].markers.length?'R':'X';}
+   else if(col>=shift)color=runs[col-shift].markers.length===row-1?'X':'R';
+   if(color){streams[name].push(color);events[name].push({color,round:item.round});}
+  }
+ }
+ return {items,runs,streams,events,preTies};
+}
+function layoutColumns(groups,limit=65){
+ const cells=[],used=new Set();
+ let maxX=0;
+ const use=(x,y)=>used.has(x+':'+y),write=(x,y,val)=>{used.add(x+':'+y);cells.push({x,y,...val});if(x>maxX)maxX=x;};
+ groups.forEach((run,col)=>{
+  let x=col,y=0,turning=false;
+  run.markers.forEach((mark,i)=>{
+   if(i){
+    if(!turning&&y<5&&!use(x,y+1))y++;
+    else {turning=true;x++;while(use(x,y))x++;}
+   }
+   write(x,y,{value:run.value,round:mark.round,ties:mark.ties||0});
+  });
+ });
+ const first=Math.max(0,maxX-limit+1);
+ return {cells:cells.filter(c=>c.x>=first),first,cols:Math.max(8,maxX-first+1),truncated:first>0};
+}
+function roadToHtml(road,kind){
+ const data=layoutColumns(road),lookup=new Map(data.cells.map(c=>[c.x+':'+c.y,c]));
+ const last=data.cells.at(-1);
+ let html='<div class="roadDisplay" role="img" aria-label="'+(kind==='bead'?'Bảng hạt':kind==='big'?'Big Road':kind==='eye'?'Big Eye':kind==='small'?'Small Road':'Cockroach Road')+'"><div class="roadMatrix">';
+ for(let x=data.first;x<data.first+data.cols;x++)for(let y=0;y<6;y++){
+  const cell=lookup.get(x+':'+y);if(!cell){html+='<div class="roadCell"></div>';continue;}
+  const isLast=cell===last;
+  let csskind=kind,csscol='',glyph='';
+  if(kind==='bead'){csscol=cell.value.toLowerCase();glyph=cell.value==='H'?'T':cell.value;}
+  else if(kind==='big'){csscol=cell.value.toLowerCase();glyph='';}
+  else {csscol=cell.value==='R'?'red':'blue';glyph=kind==='roach'?'╱':'';}
+  const tie=kind==='big'&&cell.ties?'<span class="roadTie">╱</span>'+(cell.ties>1?'<span class="roadTieNum">'+cell.ties+'</span>':''):'';
+  html+=`<div class="roadCell ${csskind} ${csscol}${isLast?' latest':''}" title="${cell.round?'#'+cell.round:''}${cell.ties?' · '+cell.ties+' Hòa':''}"><span class="symbol">${glyph}</span>${tie}</div>`;
+ }
+ html+='</div></div>';
+ if(data.truncated)html+='<div class="roadExplain">Hiển thị '+data.cols+' cột cuối; các ván cũ vẫn được tính đầy đủ.</div>';
+ return html;
+}
+function buildRoadGroups(view){
+ const {items,runs,streams,events}=view;
+ const byRun=runs.map(run=>({value:run.side,markers:run.markers}));
+ const makeDerived=(name)=>{
+  const groups=[];
+  for(const item of events[name]){const value=item.color;if(!groups.length||groups.at(-1).value!==value)groups.push({value,markers:[]});groups.at(-1).markers.push({round:item.round,ties:0});}
+  return groups;
+ };
+ // Bảng hạt: 6 hàng x cột, kể cả hòa.
+ // Bảng hạt dùng tọa độ thời gian, không nén Hòa.
+ const beadCells=items.map((item,i)=>({x:Math.floor(i/6),y:i%6,value:item.out,round:item.round,ties:0}));
+ const last=beadCells.length?Math.floor((beadCells.length-1)/6):0;
+ const first=Math.max(0,last-64);
+ const beadRoad={cells:beadCells.filter(c=>c.x>=first),first,cols:Math.max(8,last-first+1),truncated:first>0};
+ return {bead:beadRoad,big:byRun,eye:makeDerived('eye'),small:makeDerived('small'),roach:makeDerived('roach')};
+}
+function drawBead(road){
+ const lookup=new Map(road.cells.map(c=>[c.x+':'+c.y,c]));const last=road.cells.at(-1);
+ let h='<div class="roadDisplay" role="img" aria-label="Bảng hạt P B T"><div class="roadMatrix">';
+ for(let x=road.first;x<road.first+road.cols;x++)for(let y=0;y<6;y++){
+  const c=lookup.get(x+':'+y);if(!c){h+='<div class="roadCell"></div>';continue;}
+  const col=c.value.toLowerCase(),text=c.value==='H'?'T':c.value;
+  h+=`<div class="roadCell bead ${col}${c===last?' latest':''}" title="#${c.round} · ${text}"><span class="symbol">${text}</span></div>`;
+ }
+ return h+'</div></div>'+(road.truncated?'<div class="roadExplain">Chỉ hiện 65 cột cuối, vẫn giữ các ván cũ trong tính toán.</div>':'');
+}
+function renderRoadBoards(b){
+ const dr=deriveRoadDrawing(b.rounds),groups=buildRoadGroups(dr),round=lastRound(b);
+ const p=b.rounds.filter(x=>x.out==='P').length,bk=b.rounds.filter(x=>x.out==='B').length,h=b.rounds.filter(x=>x.out==='H').length;
+ $('roadRound').textContent='Đã nhập đến #'+round;
+ $('roadTopStats').innerHTML=`<span>${b.rounds.length} ván</span><span>P: ${p}</span><span>B: ${bk}</span><span>Hòa: ${h}</span><span>Big Road: ${dr.runs.length} cột</span>${dr.preTies?'<span>'+dr.preTies+' hòa đầu chưa có ô Big Road</span>':''}`;
+ const config=[
+  {id:'bead',title:'1 · BẢNG HẠT (BEAD PLATE)',desc:'6 hàng; đọc từ trên xuống, hết cột sang cột bên phải; gồm cả Hòa',draw:drawBead(groups.bead),available:true},
+  {id:'big',title:'2 · BIG ROAD (ĐẠI LỘ)',desc:'P tròn xanh · B tròn đỏ; Hòa gạch xanh lá lên ô cũ',draw:roadToHtml(groups.big,'big'),available:dr.runs.length>0},
+  {id:'eye',title:'3 · BIG EYE BOY (ĐẠI NHÃN)',desc:'Vòng tròn rỗng đỏ/xanh; cần đủ cột Big Road',draw:roadToHtml(groups.eye,'eye'),available:dr.streams.eye.length>0},
+  {id:'small',title:'4 · SMALL ROAD (TIỂU LỘ)',desc:'Chấm đặc đỏ/xanh; so sánh hình dạng cột cách 2',draw:roadToHtml(groups.small,'small'),available:dr.streams.small.length>0},
+  {id:'roach',title:'5 · COCKROACH ROAD (GIÁN LỘ)',desc:'Nét gạch chéo đỏ/xanh; so sánh hình dạng cột cách 3',draw:roadToHtml(groups.roach,'roach'),available:dr.streams.roach.length>0}
+ ];
+ const checks=b.roadChecks||{};
+ $('roadBoards').innerHTML=config.map(c=>{
+  const entry=checks[c.id],isCurrent=entry&&entry.round===round,status=isCurrent?entry.status:'pending';
+  const wording=status==='ok'?'✓ ĐÃ ĐỐI CHIẾU: KHỚP':status==='bad'?'✕ ĐANG LỆCH':'Chưa đối chiếu ảnh thật';
+  return `<article class="roadPanel"><div class="roadTitle"><strong>${c.title}</strong><small>${c.available?'Đến ván #'+round:'Chưa đủ dấu'}</small></div>${c.draw}<div class="roadExplain">${c.desc}</div><div class="checkRow"><span class="checkStatus ${status==='ok'?'ok':status==='bad'?'bad':''}">${wording}</span><button class="checkButton ok ${status==='ok'?'active':''}" data-check="${c.id}" data-state="ok" type="button">✓ Khớp</button><button class="checkButton bad ${status==='bad'?'active':''}" data-check="${c.id}" data-state="bad" type="button">✕ Lệch</button></div></article>`;
+ }).join('');
+ for(const button of $('roadBoards').querySelectorAll('[data-check]'))button.addEventListener('click',()=>{
+  const key=button.dataset.check,status=button.dataset.state;
+  if(!b.roadChecks)b.roadChecks={};
+  const before=b.roadChecks[key];b.roadChecks[key]=(before&&before.round===round&&before.status===status)?null:{status,round};
+  if(!save()){b.roadChecks[key]=before;return;}renderRoadBoards(b);
+  toast((status==='ok'?'Đã đánh dấu khớp ':'Đã đánh dấu lệch ')+key.toUpperCase());
+ });
+ // Vừa render xong cho người dùng thấy phần dấu mới nhất ngay bên phải.
+ for(const track of $('roadBoards').querySelectorAll('.roadDisplay'))track.scrollLeft=track.scrollWidth;
+}
+let currentTab='play';
+function showTab(name){
+ currentTab=name;
+ for(const [tab,page] of [['play','Play'],['roads','Roads']]){
+  const active=name===tab;
+  $('page'+page).hidden=!active;
+  $('tab'+page.charAt(0).toUpperCase()+page.slice(1)).classList.toggle('active',active);
+  $('tab'+page.charAt(0).toUpperCase()+page.slice(1)).setAttribute('aria-selected',String(active));
+ }
+ if(name==='roads')renderRoadBoards(board());
+}
+
+const RULES=[
+ {id:'H01',dir:'P',short:'Hạt 2P/5 · Big Road cột −2 dài 1 · Big Eye đổi màu · Small xanh · Cockroach hỗn hợp',scope:'Cả 5 bảng',fn:s=>s.beadP5===2&&s.bigPrev2===1&&s.eye2Different&&s.small==='X'&&s.roach3Mixed},
+ {id:'H02',dir:'B',short:'Big Eye 3 dấu hỗn hợp · Small 2 đỏ · Cockroach đỏ',scope:'3 bảng cầu phụ',fn:s=>s.eye3Mixed&&s.small2==='RR'&&s.roach==='R'},
+ {id:'H03',dir:'P',short:'Hạt 2P/5 · Big Road cột −2 dài 1 · Small xanh · Cockroach hỗn hợp',scope:'4 bảng cầu',fn:s=>s.beadP5===2&&s.bigPrev2===1&&s.small==='X'&&s.roach3Mixed}
+];
+function analyze(b){
+ let history=[],prev=null;const events=Object.fromEntries(RULES.map(r=>[r.id,[]]));
+ for(const item of b.rounds){
+  if(prev!==null&&item.round!==prev+1)history=[];
+  prev=item.round;
+  const s=roadShape(history);
+  if(s&&s.cols>=6){for(const r of RULES){if(r.fn(s)){const outcome=item.out;events[r.id].push({from:item.round-1,to:item.round,outcome,dir:r.dir,status:outcome==='H'?'H':outcome===r.dir?'Đ':'S'});}}}
+  if(item.out!=='H')history.push(item.out);
+ }
+ const current=roadShape(history);
+ const matches=current&&current.cols>=6?RULES.filter(r=>r.fn(current)):[];
+ return {events,current,matches};
+}
+function stats(events){const yes=events.filter(e=>e.status==='Đ').length,no=events.filter(e=>e.status==='S').length,tie=events.filter(e=>e.status==='H').length;return {yes,no,tie,n:yes+no,rate:yes+no?(100*yes/(yes+no)).toFixed(1).replace(/\.0$/,'')+'%':'—'};}
+const sideLabel=o=>o==='P'?'PLAYER':o==='B'?'BANKER':'HÒA';
+const colLabel=c=>c==='R'?'ĐỎ':c==='X'?'XANH':'—';
+function render(){
+ const b=board(),a=analyze(b),next=lastRound(b)+1;
+ $('nextBadge').textContent='Ván #'+next;
+ $('totalCount').textContent=b.rounds.length+' ván';
+ $('boardSelect').innerHTML=state.boards.map((x,i)=>`<option value="${i}">${htmlSafe(x.name)} (${x.rounds.length})</option>`).join('');$('boardSelect').value=String(state.active);
+ $('undoBtn').disabled=b.rounds.length===0;
+ const dirs=new Set(a.matches.map(r=>r.dir));const clash=dirs.size>1;
+ const hero=$('hero');hero.className='hero '+(clash?'warning':dirs.size===0?'blank':'');
+ if(!a.current||a.current.cols<6){hero.innerHTML=`<div class="heroTop">DỰ BÁO VÁN #${next}</div><div class="heroBig idle">CHƯA ĐỦ LỊCH SỬ</div><div class="heroSmall">Cần ít nhất 6 cột Big Road để tính đầy đủ ba cầu phụ · hiện ${a.current?.cols||0}/6 cột.</div>`;}
+ else if(!dirs.size){hero.innerHTML=`<div class="heroTop">DỰ BÁO VÁN #${next}</div><div class="heroBig idle">KHÔNG CÓ TÍN HIỆU</div><div class="heroSmall">Chưa có rule H01–H03 nào khớp điều kiện.</div>`;}
+ else if(clash){hero.innerHTML=`<div class="heroTop">DỰ BÁO VÁN #${next}</div><div class="heroBig conflict">XUNG ĐỘT P / B</div><div class="heroSmall">${a.matches.map(r=>r.id+' → '+r.dir).join(' · ')} · Không chọn một phía.</div>`;}
+ else {const dir=[...dirs][0];hero.innerHTML=`<div class="heroTop">TÍN HIỆU THỬ · VÁN #${next}</div><div class="heroBig ${dir.toLowerCase()}">DỰ BÁO ${sideLabel(dir)}</div><div class="heroSmall">${a.matches.map(r=>r.id).join(' + ')} khớp${a.matches.some(x=>x.id==='H01')&&a.matches.some(x=>x.id==='H03')?' · H01 là trường hợp con của H03, không tính hai phiếu độc lập.':''}</div>`;}
+ $('rules').innerHTML=RULES.map(r=>{
+  const ev=a.events[r.id],s=stats(ev),on=a.matches.some(x=>x.id===r.id),recent=ev.slice(-8);
+  const chips=recent.length?recent.map((e,i)=>`<button type="button" data-rid="${r.id}" data-eidx="${ev.length-recent.length+i}" class="${e.status==='Đ'?'good':e.status==='S'?'bad':'tie'}" title="Ván #${e.to}: ${e.status}">${e.status}</button>`).join(''):'<span class="tiny">Chưa có lượt dự báo được chấm</span>';
+  return `<article class="rule ${on?'hit':''}"><div class="ruleHead"><span class="ruleID">${r.id}</span><span class="ruleDirection ${r.dir==='B'?'b':''}">→ ${r.dir}</span><span class="ruleStatus">${on?'ĐANG KHỚP':'CHƯA KHỚP'}</span></div><div class="ruleName">${r.scope} · ${r.short}</div><div class="ruleAction ${on?r.dir.toLowerCase():'off'}">${on?'BÁO '+sideLabel(r.dir)+' · VÁN #'+next:'Không phát tín hiệu cho ván #'+next}</div><div class="numbers"><span class="rate ${!s.n?'none':s.yes<s.no?'low':''}">${s.rate}</span><div class="detail">Bàn này: <b>${s.yes} Đ / ${s.no} S / ${s.tie} H</b><div>${s.n} lượt không hòa${s.n&&s.n<10?' · ít mẫu':''}</div></div></div><div class="historyChips" id="chips-${r.id}">${chips}</div><div class="historicalDetail" id="detail-${r.id}">${ev.length?'Chạm ô Đ/S/H để xem tỷ lệ lúc đó.':'Mỗi tín hiệu sẽ được chấm khi có kết quả ván tiếp theo.'}</div></article>`;
+ }).join('');
+ for(const button of $('rules').querySelectorAll('[data-rid]'))button.addEventListener('click',()=>{
+   const r=button.dataset.rid,ev=a.events[r],idx=Number(button.dataset.eidx),e=ev[idx],s=stats(ev.slice(0,idx+1));
+   for(const x of $('chips-'+r).querySelectorAll('button'))x.classList.toggle('selected',x===button);
+   $('detail-'+r).innerHTML=`<strong>Ván #${e.from} → #${e.to}</strong> · báo ${sideLabel(e.dir)} · thực tế ${sideLabel(e.outcome)} · ${e.status} · <strong>${s.rate}</strong> (${s.yes}Đ/${s.no}S/${s.tie}H tính tới ván này)`;
+ });
+ const s=a.current;if(!s){$('roads').innerHTML='<span>Chưa đủ lịch sử</span>';}else $('roads').innerHTML=`<span>Hạt: ${s.side} · ${s.beadP5??'—'}P/5</span><span>Big Road: ${s.cols} cột · bệt ${s.run}</span><span class="${s.eye}">Big Eye: ${colLabel(s.eye)}</span><span class="${s.small}">Small: ${colLabel(s.small)}</span><span class="${s.roach}">Cockroach: ${colLabel(s.roach)}</span>`;
+ if(currentTab==='roads')renderRoadBoards(b);
+ const recent=b.rounds.slice(-40);$('recent').innerHTML=recent.length?recent.map(v=>`<button type="button" data-round="${v.round}" class="${v.out.toLowerCase()}">${v.out}<small>${v.round}</small></button>`).join(''):'<span class="tiny">Chưa nhập ván nào.</span>';
+ $('historyNote').textContent=b.rounds.length?'Có '+b.rounds.length+' ván · các ô hiển thị 40 ván gần nhất · chạm một ô để sửa. Hòa không tạo dấu cầu phụ.':'Chạm PLAYER / BANKER / HÒA để thêm kết quả.';
+ for(const btn of $('recent').querySelectorAll('[data-round]'))btn.addEventListener('click',()=>{
+  const n=Number(btn.dataset.round),rec=b.rounds.find(r=>r.round===n);if(!rec)return;
+  const value=prompt(`Sửa ván #${n} (${rec.out}) thành P, B hoặc H:`,rec.out);if(value===null)return;
+  const outcome=value.trim().toUpperCase().replace('T','H');if(!['P','B','H'].includes(outcome)){toast('Chỉ nhập P, B hoặc H.');return;}
+  const old=rec.out,oldChecks=b.roadChecks;rec.out=outcome;b.roadChecks={};if(!save()){rec.out=old;b.roadChecks=oldChecks;return;}render();toast('Đã sửa ván #'+n+' · hãy đối chiếu lại cầu');
+ });
+}
+function addRound(out){const b=board(),n=lastRound(b)+1;b.rounds.push({round:n,out,origin:'live'});if(!save()){b.rounds.pop();return;}render();toast('Đã lưu #'+n+' · '+sideLabel(out));}
+function download(name,txt){const file=new Blob([txt],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);}
+function init(){
+ $('tabPlay').addEventListener('click',()=>showTab('play'));
+ $('tabRoads').addEventListener('click',()=>showTab('roads'));
+ for(const x of document.querySelectorAll('[data-out]'))x.addEventListener('click',()=>addRound(x.dataset.out));
+ $('boardSelect').addEventListener('change',e=>{state.active=Number(e.target.value)||0;save();render();});
+ $('addBoard').addEventListener('click',()=>{const name=prompt('Tên bàn mới:',`Bàn ${state.boards.length+1}`);if(name===null)return;const nm=name.trim();if(!nm){toast('Tên bàn không được rỗng.');return;}state.boards.push({id:uuid(),name:nm.slice(0,70),roundStart:1,rounds:[]});state.active=state.boards.length-1;save();render();toast('Đã tạo '+nm);});
+ $('removeBoard').addEventListener('click',()=>{const b=board();if(!confirm(`Xóa ${b.name} cùng ${b.rounds.length} ván? Hãy xuất JSON trước khi xóa.`))return;state.boards.splice(state.active,1);if(!state.boards.length)state.boards.push({id:uuid(),name:'Bàn 1',roundStart:1,rounds:[]});state.active=Math.min(state.active,state.boards.length-1);save();render();});
+ $('undoBtn').addEventListener('click',()=>{const b=board(),r=b.rounds.at(-1);if(!r||!confirm(`Bỏ ván cuối #${r.round} (${r.out})?`))return;b.rounds.pop();save();render();toast('Đã bỏ ván cuối.');});
+ $('exportBtn').addEventListener('click',()=>{download('Baccarat_3Rule_H01_H02_H03_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({...state,exportedAt:new Date().toISOString()},null,2));toast('Đã xuất JSON sao lưu.');});
+ $('importBtn').addEventListener('click',()=>$('importFile').click());
+ $('importFile').addEventListener('change',async(e)=>{const f=e.target.files?.[0];if(!f)return;try{if(f.size>15e6)throw Error('File quá lớn');const obj=JSON.parse(await f.text());let bs=normalBoards(obj);if(!bs.length&&Array.isArray(obj)&&obj.length)bs=normalBoards({boards:[{name:'Bàn nhập',rounds:obj}]});bs=bs.filter(x=>x.rounds.length);if(!bs.length)throw Error('Không tìm thấy ván P/B/H hoặc lá bài hợp lệ.');const count=bs.reduce((s,b)=>s+b.rounds.length,0);if(!confirm(`Nhập thêm ${bs.length} bàn, ${count} ván? Các bàn hiện có vẫn giữ nguyên.`))return;for(const b of bs){b.id=uuid();b.name=b.name.slice(0,70);state.boards.push(b);}state.active=state.boards.length-bs.length;if(!save()){state.boards.splice(-bs.length);return;}render();toast('Đã nhập '+count+' ván từ JSON.');}catch(err){alert('Không đọc được JSON: '+err.message);}finally{e.target.value='';}});
+ save();render();
+}
+init();
+})();
+</script>
+</body>
+</html>
